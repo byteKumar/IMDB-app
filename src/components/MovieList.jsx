@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Pagination from "./Pagination";
 
 const MovieList = () => {
 
     const [movies, setMovies] = useState([]);
 
     useEffect(() => {
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=0b5415eb9bf023d556ef265b425e0e4a&language=en-US&page=1')
+        loadMovieByPage(1);
+    }, []);
+
+    const loadMovieByPage = (pageNo) => {
+        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=0b5415eb9bf023d556ef265b425e0e4a&language=en-US&page=${pageNo}`)
             .then((res) => res.json())
             .then((data) => setMovies(data.results));
-    }, []);
+    }
     return (
         <div className="movielist-wrapper">
             <div className="movielist-heading">
@@ -26,6 +31,7 @@ const MovieList = () => {
                     ))
                 }
             </div>
+            <Pagination loadMovieByPage={loadMovieByPage} />
         </div>
     )
 }
