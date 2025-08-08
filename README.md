@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# IMDB Movie App 🎬
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based movie discovery application that allows users to browse trending movies, view detailed information, and manage their favorite films. Built using The Movie Database (TMDb) API.
 
-## Available Scripts
+## ✨ Features
+
+- **Browse Trending Movies**: View popular movies with poster images and titles
+- **Movie Details**: Click on any movie to see detailed information including overview and backdrop images
+- **Pagination**: Navigate through multiple pages of movie results
+- **Favorites**: Dedicated section for managing favorite movies (coming soon)
+- **Responsive Design**: Clean and intuitive user interface
+- **React Router**: Seamless navigation between different views
+
+## 🚀 Live Demo
+
+[Add your deployment link here]
+
+## 🛠️ Technologies Used
+
+- **React 19.1.1** - Frontend framework
+- **React Router DOM 7.7.1** - Client-side routing
+- **TMDb API** - Movie data source
+- **CSS3** - Styling and responsive design
+- **JavaScript ES6+** - Modern JavaScript features
+
+## 📁 Project Structure
+
+```
+imdb-app/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── manifest.json
+├── src/
+│   ├── components/
+│   │   ├── Header.jsx          # Navigation header
+│   │   ├── MovieList.jsx       # Display grid of movies
+│   │   ├── MovieDetail.jsx     # Individual movie details
+│   │   ├── Pagination.jsx      # Page navigation
+│   │   └── Favourite.jsx       # Favorites management
+│   ├── App.js                  # Main app component with routing
+│   ├── App.css                 # Global styles
+│   └── index.js               # App entry point
+├── package.json
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (version 14 or higher)
+- npm or yarn package manager
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/byteKumar/IMDB-app.git
+   cd imdb-app
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**
+   ```bash
+   npm start
+   ```
+
+4. **Open your browser**
+   Navigate to [http://localhost:3000](http://localhost:3000) to view the app.
+
+## 📱 Available Scripts
 
 In the project directory, you can run:
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode. The page will reload when you make changes.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production to the `build` folder. The build is minified and optimized for the best performance.
 
 ### `npm run eject`
+**Note: This is a one-way operation. Once you eject, you can't go back!**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔗 API Integration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This app uses The Movie Database (TMDb) API to fetch movie data:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Popular Movies Endpoint**: `https://api.themoviedb.org/3/movie/popular`
+- **Movie Details Endpoint**: `https://api.themoviedb.org/3/movie/{movie_id}`
+- **Image Base URL**: `https://image.tmdb.org/t/p/w500/`
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🎯 Upcoming Features
 
-## Learn More
+- [ ] Add to Favorites functionality
+- [ ] Search movies by title
+- [ ] Filter movies by genre
+- [ ] Movie ratings and reviews
+- [ ] User authentication
+- [ ] Watchlist management
+- [ ] Dark/Light theme toggle
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🤝 Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### Code Splitting
+## 📄 License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-### Analyzing the Bundle Size
+## 👨‍💻 Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Chaman Kumar**
+- GitHub: [@byteKumar](https://github.com/byteKumar)
 
-### Making a Progressive Web App
+## 🙏 Acknowledgments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [The Movie Database (TMDb)](https://www.themoviedb.org/) for providing the movie data API
+- [Create React App](https://github.com/facebook/create-react-app) for the initial project setup
+- [React Router](https://reactrouter.com/) for routing functionality
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+⭐ Star this repo if you find it helpful!
