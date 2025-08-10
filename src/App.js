@@ -2,7 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import MovieList from "./components/MovieList";
 import MovieDetail from "./components/MovieDetail";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter,
   createBrowserRouter,
@@ -16,6 +16,10 @@ import Favourite from "./components/Favourite";
 
 function App() {
   const [favourites, setFavourites] = useState([]);
+
+  const updateLocalStorage = (data) => {
+    localStorage.setItem("favourites", JSON.stringify(data));
+  };
 
   const handleAddFavourite = (movie) => {
     setFavourites((prevData) => ({
@@ -31,6 +35,18 @@ function App() {
       return prevDataCopy;
     });
   };
+
+  useEffect(() => {
+    const persistedFavourites = localStorage.getItem('favourites');
+    if (persistedFavourites) {
+      setFavourites(JSON.parse(persistedFavourites));
+    }
+  }, []);
+
+  useEffect(() => {
+    updateLocalStorage(favourites);
+  }, [favourites]);
+  
   return (
     <div className="App">
       {/* <RouterProvider router={router} /> */}
