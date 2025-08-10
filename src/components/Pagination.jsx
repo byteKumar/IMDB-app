@@ -17,7 +17,6 @@ const Pagination = ({ loadMovieByPage }) => {
                 startingPage = pageNo - 2 > 0 ? pageNo - 2 : 1;
             } else if (pageNo === pages[pages.length - 1]) {
                 startingPage = pageNo + 2 < totalPages ? (pageNo + 2) - maxResultPageSize + 1 : totalPages - maxResultPageSize + 1;
-
             } else {
                 startingPage = 1;
             }

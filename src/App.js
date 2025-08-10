@@ -1,7 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import MovieList from './components/MovieList';
-import MovieDetail from './components/MovieDetail';
+import logo from "./logo.svg";
+import "./App.css";
+import MovieList from "./components/MovieList";
+import MovieDetail from "./components/MovieDetail";
+import { useState } from "react";
 import {
   BrowserRouter,
   createBrowserRouter,
@@ -9,11 +10,27 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
-import Favourite from './components/Favourite';
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Favourite from "./components/Favourite";
 
 function App() {
+  const [favourites, setFavourites] = useState([]);
+
+  const handleAddFavourite = (movie) => {
+    setFavourites((prevData) => ({
+      ...prevData,
+      [movie.id]: movie,
+    }));
+  };
+
+  const handleDeleteFavourite = (movie) => {
+    setFavourites((prevData) => {
+      const prevDataCopy = { ...prevData };
+      delete prevDataCopy[movie.id];
+      return prevDataCopy;
+    });
+  };
   return (
     <div className="App">
       {/* <RouterProvider router={router} /> */}
@@ -21,10 +38,27 @@ function App() {
       <BrowserRouter>
         <Header />
         <Routes>
-          <Route path="/" element={<MovieList />} />
+          <Route
+            path="/"
+            element={
+              <MovieList
+                favourites={favourites}
+                onAdd={handleAddFavourite}
+                onDelete={handleDeleteFavourite}
+              />
+            }
+          />
           <Route path="/movie-detail" element={<Navigate to={"/"} />} />
           <Route path="/movie-detail/:movieId" element={<MovieDetail />} />
-          <Route path="/favourite" element={<Favourite />} />
+          <Route
+            path="/favourite"
+            element={
+              <Favourite
+                favourites={favourites}
+                onDelete={handleDeleteFavourite}
+              />
+            }
+          />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Routes>
       </BrowserRouter>
