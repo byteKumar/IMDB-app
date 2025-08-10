@@ -137,6 +137,10 @@
   background-color: white;
 }
 
+.favourite-section .left-section .genres-section .genre.selected {
+  background-color: aqua;
+}
+
 .favourite-section .left-section .genres-section .genre:hover {
   cursor: pointer;
   background-color: bisque;

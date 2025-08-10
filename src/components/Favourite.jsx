@@ -1,25 +1,30 @@
+import { useEffect, useState } from "react";
+
+let genreids = {
+  28: "Action",
+  12: "Adventure",
+  16: "Animation",
+  35: "Comedy",
+  80: "Crime",
+  99: "Documentary",
+  18: "Drama",
+  10751: "Family",
+  14: "Fantasy",
+  36: "History",
+  27: "Horror",
+  10402: "Music",
+  9648: "Mystery",
+  10749: "Romance",
+  878: "Sci-Fi",
+  10770: "TV",
+  53: "Thriller",
+  10752: "War",
+  37: "Western",
+};
+
 const Favourite = ({ favourites, onDelete }) => {
-  let genreids = {
-    28: "Action",
-    12: "Adventure",
-    16: "Animation",
-    35: "Comedy",
-    80: "Crime",
-    99: "Documentary",
-    18: "Drama",
-    10751: "Family",
-    14: "Fantasy",
-    36: "History",
-    27: "Horror",
-    10402: "Music",
-    9648: "Mystery",
-    10749: "Romance",
-    878: "Sci-Fi",
-    10770: "TV",
-    53: "Thriller",
-    10752: "War",
-    37: "Western",
-  };
+  const [filteredFavourites, setFilteredFavourites] = useState([]);
+  const [selectedGenre, setSelectedGenre] = useState("");
 
   const genres = (() => {
     const selectedGenres = new Set();
@@ -29,21 +34,66 @@ const Favourite = ({ favourites, onDelete }) => {
     return Array.from(selectedGenres);
   })();
 
+  const handleSearch = (e) => {
+    setFilteredFavourites(
+      Object.values(favourites).filter((movie) =>
+        movie.original_title
+          .toLowerCase()
+          .includes(e.target.value?.toLowerCase())
+      )
+    );
+  };
+
+  const handleFilterByGenre = (genreId) => () => {
+    setSelectedGenre(genreId);
+    setFilteredFavourites(
+      Object.values(favourites).filter(
+        (movie) => !genreId || movie.genre_ids[0] === genreId
+      )
+    );
+  };
+
+  const handleSortingByRating = (desc) => {
+    setFilteredFavourites(
+      Object.values(favourites).sort((a, b) => {
+        return desc
+          ? a.vote_average - b.vote_average
+          : b.vote_average - a.vote_average;
+      })
+    );
+  };
+
+  useEffect(() => {
+    setFilteredFavourites(Object.values(favourites));
+  }, [favourites]);
+
   return (
     <div className="favourite-wrapper">
       <h1>Favourite</h1>
       <div className="favourite-section">
         <div className="left-section">
           <div className="genres-section">
-            <div className="genre">All Genres</div>
+            <div
+              className={`genre ${selectedGenre === "" ? "selected" : ""}`}
+              onClick={handleFilterByGenre("")}
+            >
+              All Genres
+            </div>
             {genres.map((genreId) => (
-              <div className="genre">{genreids[genreId]}</div>
+              <div
+                className={`genre ${
+                  selectedGenre === genreId ? "selected" : ""
+                }`}
+                onClick={handleFilterByGenre(genreId)}
+              >
+                {genreids[genreId]}
+              </div>
             ))}
           </div>
         </div>
         <div className="right-section">
           <div className="search">
-            <input placeholder="Search by Movie Name" />
+            <input placeholder="Search by Movie Name" onKeyUp={handleSearch} />
           </div>
           <div className="table">
             <table>
@@ -53,12 +103,23 @@ const Favourite = ({ favourites, onDelete }) => {
                   <th>Title</th>
                   <th>Genre</th>
                   <th>Popularity</th>
-                  <th>Rating</th>
+                  <th>
+                    <span onClick={() => handleSortingByRating(true)}>
+                      &#8963;
+                    </span>
+                    Rating
+                    <span
+                      style={{ fontSize: "x-large" }}
+                      onClick={() => handleSortingByRating(false)}
+                    >
+                      &#8964;
+                    </span>
+                  </th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
-                {Object.values(favourites).map((movie) => (
+                {Object.values(filteredFavourites).map((movie) => (
                   <tr>
                     <td>
                       <img
