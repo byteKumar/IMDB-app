@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FavouriteMovieContext } from "../context/FavouriteMovieContext";
 
 let genreids = {
   28: "Action",
@@ -22,7 +23,8 @@ let genreids = {
   37: "Western",
 };
 
-const Favourite = ({ favourites, onDelete }) => {
+const Favourite = () => {
+  const { favourites, onDelete } = useContext(FavouriteMovieContext);
   const [filteredFavourites, setFilteredFavourites] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState("");
 
